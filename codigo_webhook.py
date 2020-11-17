@@ -203,12 +203,13 @@ def main(dict):
     
     resp = {}
     resp['nome'] = r.json()['name']
-    resp['altura'] = r.json()['height']
-    resp['peso'] =  r.json()['mass']
+    resp['altura'] = r.json()['height'].replace('unknown', 'uma quantidade desconhecida de')
+    resp['peso'] =  r.json()['mass'].replace('unknown', 'uma quantidade desconhecida de')
     resp['cabelo'] = translate_cabelo(r.json()['hair_color'])
     resp['pele'] = translate_pele(r.json()['skin_color'])
     resp['olhos'] = translate_olhos(r.json()['eye_color'])
-    resp['idade'] = r.json()['birth_year'].replace('BBY', ' anos, no ano da batalha de Yavin')
+    resp['idade'] = r.json()['birth_year'].replace('BBY', ' anos, no ano da batalha de Yavin')\
+        .replace('unknown', 'uma quantidade desconhecida de anos...')
     resp['sexo'] = translate_genero(r.json()['gender'])
     
     return resp
